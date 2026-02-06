@@ -19,7 +19,7 @@ import com.discord.widgets.chat.list.entries.MessageEntry
 // Plugin class. Must extend Plugin and override start and stop
 // Learn more: https://github.com/Aliucord/documentation/blob/main/plugin-dev/1_introduction.md#basic-plugin-structure
 @AliucordPlugin(
-    requiresRestart = false // Whether your plugin requires a restart after being installed/updated
+    requiresRestart = false, // Whether your plugin requires a restart after being installed/updated
 )
 @Suppress("unused")
 class MyFirstKotlinPlugin : Plugin() {
@@ -31,7 +31,7 @@ class MyFirstKotlinPlugin : Plugin() {
             CommandsAPI.CommandResult(
                 "Hello World!",
                 null, // List of embeds
-                false // Whether to send visible for everyone
+                false, // Whether to send visible for everyone
             )
         }
 
@@ -43,14 +43,14 @@ class MyFirstKotlinPlugin : Plugin() {
                 Utils.createCommandOption(
                     ApplicationCommandType.STRING,
                     "name",
-                    "Person to say hello to"
+                    "Person to say hello to",
                 ),
                 Utils.createCommandOption(
                     ApplicationCommandType.USER,
                     "user",
-                    "User to say hello to"
-                )
-            )
+                    "User to say hello to",
+                ),
+            ),
         ) { ctx ->
             // Check if a user argument was passed
             val username = if (ctx.containsArg("user")) {
@@ -71,7 +71,7 @@ class MyFirstKotlinPlugin : Plugin() {
             // Refer to https://kotlinlang.org/docs/reflection.html#class-references
             // and https://docs.oracle.com/javase/tutorial/reflect/class/classNew.html
             Int::class.java, // int type
-            ChatListEntry::class.java // ChatListEntry entry
+            ChatListEntry::class.java, // ChatListEntry entry
         ) { param ->
             // see https://api.xposed.info/reference/de/robv/android/xposed/XC_MethodHook.MethodHookParam.html
             // Obtain the second argument passed to the method, so the ChatListEntry
@@ -117,8 +117,11 @@ class MyFirstKotlinPlugin : Plugin() {
         // Patch that hides your typing status by replacing the method and simply doing nothing
         patcher.instead<StoreUserTyping>(
             "setUserTyping",
-            Long::class.java // java.lang.Long channelId
-        ) { null }
+            Long::class.java, // java.lang.Long channelId
+        ) {
+            // Return null
+            null
+        }
     }
 
     override fun stop(context: Context) {

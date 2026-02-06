@@ -7,7 +7,7 @@ aliucord {
         """
         # 1.0.0
         * Initial plugin release!
-        """.trimIndent()
+        """.trimIndent(),
     )
     // Image or Gif that will be shown at the top of your changelog page
     // changelogMedia.set("https://cool.png")

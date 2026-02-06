@@ -2,14 +2,14 @@ package com.github.yournamehere;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
 import com.aliucord.Utils;
 import com.aliucord.annotations.AliucordPlugin;
 import com.aliucord.api.CommandsAPI;
 import com.aliucord.entities.MessageEmbedBuilder;
 import com.aliucord.entities.Plugin;
-import com.aliucord.patcher.Hook;
-import com.aliucord.patcher.InsteadHook;
-import com.aliucord.patcher.PreHook;
+import com.aliucord.patcher.*;
 import com.aliucord.wrappers.embeds.MessageEmbedWrapper;
 import com.discord.api.commands.ApplicationCommandType;
 import com.discord.api.message.embed.MessageEmbed;
@@ -31,7 +31,7 @@ import java.util.Iterator;
 @SuppressWarnings("unused")
 public class MyFirstJavaPlugin extends Plugin {
     @Override
-    public void start(Context context) throws Throwable {
+    public void start(@NonNull Context context) throws Throwable {
         // Register a command with the name hello and description "My first command!" and no arguments.
         // Learn more: https://github.com/Aliucord/documentation/blob/main/plugin-dev/2_commands.md
         commands.registerCommand("hello", "My first command!", ctx -> {
@@ -118,7 +118,7 @@ public class MyFirstJavaPlugin extends Plugin {
     }
 
     @Override
-    public void stop(Context context) {
+    public void stop(@NonNull Context context) {
         // Remove all patches
         patcher.unpatchAll();
     }
