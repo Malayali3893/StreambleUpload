@@ -10,6 +10,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   deploy:
     name: Build & Deploy Plugins
@@ -42,8 +45,8 @@ jobs:
           chmod +x ./gradlew
           ./gradlew make :generateUpdaterJson
           
-          rm $GITHUB_WORKSPACE/builds/*.zip
-          cp $GITHUB_WORKSPACE/src/**/build/outputs/*.zip $GITHUB_WORKSPACE/builds/
+          rm -f $GITHUB_WORKSPACE/builds/*.zip
+          cp $GITHUB_WORKSPACE/src/plugins/**/build/outputs/*.zip $GITHUB_WORKSPACE/builds/
           cp $GITHUB_WORKSPACE/src/build/outputs/updater.json $GITHUB_WORKSPACE/builds/
 
       - name: Upload build artifacts
@@ -51,7 +54,7 @@ jobs:
         with:
           name: plugins
           if-no-files-found: error
-          path: ${{ github.workspace }}/src/**/build/outputs/*.zip
+          path: ${{ github.workspace }}/src/plugins/**/build/outputs/*.zip
 
       - name: Push builds
         run: |

@@ -27,15 +27,13 @@ jobs:
 
       - name: Build
         run: |
+          cd $GITHUB_WORKSPACE
           chmod +x ./gradlew
           ./gradlew make
-
-          mkdir .builds
-          cp ./**/build/outputs/*.zip ./.builds
 
       - name: Upload plugin artifacts
         uses: actions/upload-artifact@v6
         with:
           name: plugins
           if-no-files-found: error
-          path: ${{ github.workspace }}/.builds/*.zip
+          path: ${{ github.workspace }}/plugins/**/build/outputs/*.zip
