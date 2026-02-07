@@ -5,6 +5,7 @@ concurrency:
   cancel-in-progress: true
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -16,12 +17,12 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           path: "src"
 
       - name: Checkout builds
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           ref: "builds"
           path: "builds"
@@ -33,7 +34,7 @@ jobs:
           distribution: temurin
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@v5
 
       - name: Build
         run: |
@@ -44,6 +45,13 @@ jobs:
           rm $GITHUB_WORKSPACE/builds/*.zip
           cp $GITHUB_WORKSPACE/src/**/build/outputs/*.zip $GITHUB_WORKSPACE/builds/
           cp $GITHUB_WORKSPACE/src/build/outputs/updater.json $GITHUB_WORKSPACE/builds/
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v6
+        with:
+          name: plugins
+          if-no-files-found: error
+          path: ${{ github.workspace }}/src/**/build/outputs/*.zip
 
       - name: Push builds
         run: |
