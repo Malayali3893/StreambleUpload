@@ -1,7 +1,5 @@
 # Aliucord Plugin Repo Template
 
----
-
 The official template for a [Aliucord](https://github.com/Aliucord) plugins monorepo.
 
 ⚠️ Make sure you enable "Include all branches" when using this template \
