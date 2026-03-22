@@ -18,7 +18,7 @@ subprojects {
 
     configure<LibraryExtension> {
         // TODO: Change to your package name
-        namespace = "com.github.yournamehere"
+        namespace = "com.z1r0v.streamableupload"
         compileSdk = 36
 
         defaultConfig {
@@ -38,10 +38,10 @@ subprojects {
 
     configure<AliucordExtension> {
         // TODO: Change to your name and user ID
-        author("yournamehere", 0L, hyperlink = true)
+        author("z1r0v", 0L, hyperlink = true)
 
         // TODO: Change to your repository
-        github("https://github.com/Aliucord/plugins-template")
+        github("https://github.com/Malayali3893/StreambleUpload")
     }
 
     configure<KtlintExtension> {
